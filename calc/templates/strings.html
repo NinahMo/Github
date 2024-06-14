@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Manipulation</title>
+
+  <style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+        height: 100vh
+      }
+    
+    button[type="submit"] {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+    
+
+  </style>
+
+
+</head>
+<body>
+  <h1>String Manipulation</h1>
+  <form method="post" action="{% url 'strings' %}">
+
+    <label for="user_string">Enter a String:</label>
+    <br>
+    <textarea id="user_string" name="user_string" rows="4" cols="50">{{ user_string }}</textarea>
+    <br>
+    <label for="substring">Enter a Substring to Search:</label>
+    <br>
+    <input type="text" id="substring" name="substring" value="{{ substring }}">
+    <br>
+    {% csrf_token %} 
+    <br>
+    <button type="submit">Manipulate String</button> 
+  </form>
+    
+  {% if user_string %}
+    <h2>Original String</h2>
+    <p>{{ user_string }}</p>
+    
+    <h2>Concatenation</h2>
+    <p>{{ concatenated_string }}</p>
+    
+    <h2>Splitting</h2>
+    <p>Split into a list: {{ split_list }}</p>
+    
+    <h2>Reversing</h2>
+    <p>Reversed String: {{ reversed_string }}</p>
+    
+    <h2>Substring Search</h2>
+    {% if substring_found %}
+      <p>Substring "{{ substring }}" found in the string.</p>
+    {% else %}
+      <p>Substring "{{ substring }}" not found in the string.</p>
+    {% endif %}
+  {% endif %}
+</body>
+</html>
+
+
